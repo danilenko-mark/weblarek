@@ -1,11 +1,13 @@
 import './scss/styles.scss';
 
 import { apiProducts } from './utils/data';
-import { ProductCatalog } from './components/base/Models/ProductCatalog';
-import { BasketModel } from './components/base/Models/BasketModel';
-import { BuyerModel } from './components/base/Models/BuyerModel';
+import { API_URL } from './utils/constants';
 import { Api } from './components/base/Api';
 import { AppApi } from './components/base/AppApi';
+
+import { ProductCatalog } from './components/Models/ProductCatalog';
+import { BasketModel } from './components/Models/BasketModel';
+import { BuyerModel } from './components/Models/BuyerModel';
 
 // ProductCatalog
 
@@ -39,7 +41,7 @@ console.log('Сумма:', basket.getTotal());
 
 console.log('Есть ли товар:', basket.hasItem(apiProducts.items[1].id));
 
-basket.removeItem(apiProducts.items[1]);
+basket.removeItem(apiProducts.items[1].id);
 
 console.log('После удаления:', basket.getItems());
 
@@ -66,7 +68,9 @@ buyer.clear();
 
 console.log('После очистки:', buyer.getData());
 
-const api = new Api('https://larek-api.nomoreparties.co/api/weblarek');
+console.log('Ошибки при пустых данных:', buyer.validate());
+
+const api = new Api(API_URL);
 
 const appApi = new AppApi(api);
 

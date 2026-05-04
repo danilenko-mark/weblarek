@@ -1,4 +1,4 @@
-import { IBuyer, TPayment } from '../../../types';
+import { IBuyer, TPayment, TFormErrors } from '../../types';
 
 export class BuyerModel {
     protected payment: IBuyer['payment'] | null = null;
@@ -29,8 +29,8 @@ export class BuyerModel {
         this.address = '';
     }
 
-    validate(): Partial<Record<keyof IBuyer, string>> {
-        const errors: Partial<Record<keyof IBuyer, string>> = {};
+    validate(): TFormErrors {
+        const errors: TFormErrors = {};
 
         if (this.payment === null) {
             errors.payment = 'Не выбран способ оплаты';
